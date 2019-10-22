@@ -91,22 +91,26 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
+      query BlogPostBySlug($slug: String!) {
+        site {
+          siteMetadata {
+            title
+            author
+          }
+        }
+        markdownRemark(fields: { slug: { eq: $slug } }) {
+          id
+          excerpt
+          html
+          frontmatter {
+            title
+            date(formatString: "MMMM DD, YYYY")
+            price
+            id
+            path
+            description
+            image
+          }
+        }
       }
-    }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
-      excerpt(pruneLength: 160)
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        description
-      }
-    }
-  }
-`
+    `
