@@ -16,12 +16,12 @@ class BlogPostTemplate extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
       <Helmet htmlAttributes={{ lang: 'en' }}>
-      <title>${siteTitle}</title>
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="NTU5MTlhMDUtNTkwNi00ZDNjLTk1ZGItZmZkODc4NmZmMDE5NjM3MDcxMzc4MTU4ODczMDI5"></script>
-      <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
+          <title>${siteTitle}</title>
+          <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+          <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="NTU5MTlhMDUtNTkwNi00ZDNjLTk1ZGItZmZkODc4NmZmMDE5NjM3MDcxMzc4MTU4ODczMDI5"></script>
+          <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
 
-    </Helmet>
+      </Helmet>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
@@ -36,15 +36,28 @@ class BlogPostTemplate extends React.Component {
             >
               {post.frontmatter.title}
             </h1>
-            <p
+            <div
               style={{
                 ...scale(-1 / 5),
                 display: `block`,
                 marginBottom: rhythm(1),
               }}
             >
-              {post.frontmatter.date}
-            </p>
+            <img src={post.frontmatter.image} alt={post.frontmatter.title}></img>
+
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+
+            <button
+                      className='snipcart-add-item buyBtn'
+                      data-item-id={post.frontmatter.id}
+                      data-item-price={post.frontmatter.price}
+                      data-item-image={post.frontmatter.image}
+                      data-item-name={post.frontmatter.title}
+                      data-item-description={post.frontmatter.description}
+                      data-item-url={"http://snipcart-gatsby.netlify.com" + post.frontmatter.path}>
+  Buy
+          </button>
+            </div>
           </header>
           <section dangerouslySetInnerHTML={{ __html: post.html }} />
           <hr
