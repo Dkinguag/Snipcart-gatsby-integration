@@ -6,9 +6,15 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import BuyButton from '../components/BuyButton'
 
 class BlogPostTemplate extends React.Component {
   render() {
+    const images = post.frontmatter.image
+  .map(x => ({
+    name: x.name,
+    src: require(`./../../content/assets${post.frontmatter.path}${x.src}.jpg`)
+  }));
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
@@ -46,6 +52,8 @@ class BlogPostTemplate extends React.Component {
             <img src={post.frontmatter.image} alt={post.frontmatter.title}></img>
 
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
+            <BuyButton post={post.frontmatter} images={images}>
+            </BuyButton>
 
             <button
                       className='snipcart-add-item buyBtn'
