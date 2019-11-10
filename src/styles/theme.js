@@ -3,7 +3,7 @@
 
 export const theme = {
     colors: {
-        main: 'thistle', //used in header
+        main: 'red', //used in header
         primaryAccent: 'linen', //used for thumbnails on homepage and as price background
         secondaryAccent: 'gainsboro', //used for header border and item buttons
     }
